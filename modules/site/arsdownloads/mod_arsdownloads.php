@@ -32,7 +32,7 @@ if (!class_exists('MydownloadsModel'))
 		{
 			$arsContainer = \FOF30\Container\Container::getInstance('com_ars');
 
-			$items = array();
+			$return = array();
 
 			/** @var \Akeeba\ReleaseSystem\Site\Model\Update $model */
 			$model = $arsContainer->factory->model('Update');
@@ -41,7 +41,7 @@ if (!class_exists('MydownloadsModel'))
 
 			foreach ($streams as $stream_id)
 			{
-				$items = $model->getItems($stream_id);
+				$items = $model->getItems($stream_id, true);
 
 				if (empty($items))
 				{
@@ -67,10 +67,10 @@ if (!class_exists('MydownloadsModel'))
 					'maturity'   => $i->maturity
 				);
 
-				$items[] = (object)$newItem;
+				$return[] = (object) $newItem;
 			}
 
-			return $items;
+			return $return;
 		}
 	}
 }

@@ -76,7 +76,7 @@ class Update extends Model
 		return $items;
 	}
 
-	public function getItems($id)
+	public function getItems($id, $limit = false)
 	{
 		$db = $this->container->db;
 
@@ -113,7 +113,8 @@ class Update extends Model
 					->where($db->qn('r') . '.' . $db->qn('published') . ' = ' . $db->q('1'))
 					->where($db->qn('c') . '.' . $db->qn('published') . ' = ' . $db->q('1'))
 					->order($db->qn('r') . '.' . $db->qn('created') . ' DESC');
-		$db->setQuery($query);
+
+		$db->setQuery($query, 0, $limit ? 1 : 0);
 
 		return $db->loadObjectList();
 	}
