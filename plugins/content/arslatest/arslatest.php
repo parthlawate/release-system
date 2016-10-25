@@ -143,6 +143,7 @@ class plgContentArslatest extends JPlugin
 		$model = $container->factory->model('Releases')->tmpInstance();
 		$model->reset(true)
 		      ->published(1)
+		      ->maturity(stable)
 		      ->latest(true)
 		      ->access_user($container->platform->getUser()->id)
 		      ->with(['items', 'category']);
